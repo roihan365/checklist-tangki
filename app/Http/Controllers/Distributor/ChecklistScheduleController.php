@@ -48,4 +48,13 @@ class ChecklistScheduleController extends Controller
             'date' => $date,
         ]);
     }
+
+    public function checklistForm(ChecklistSchedule $checklistSchedule, TankTruck $tankTruck)
+    {
+        $documents = $tankTruck->checklistDocuments()
+            ->where('checklist_schedule_id', $checklistSchedule->id)
+            ->latest()
+            ->get();
+        return view('pages.distributor.checklist-schedule.document', compact('tankTruck', 'checklistSchedule', 'documents'));
+    }
 }

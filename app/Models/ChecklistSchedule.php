@@ -41,8 +41,8 @@ class ChecklistSchedule extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function checklistResults()
+    public function checklistDocuments()
     {
-        return $this->hasMany(ChecklistResult::class);
+        return $this->hasMany(ChecklistDocument::class);
     }
 }

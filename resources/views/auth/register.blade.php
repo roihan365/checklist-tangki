@@ -18,6 +18,36 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" />
+            <x-text-input id="jenis_kelamin" class="block mt-1 w-full" type="text" name="jenis_kelamin" :value="old('jenis_kelamin')"
+                required  />
+            <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
+        </div>
+
+        <!-- Tanggal Lahir -->
+        <div class="mt-4">
+            <x-input-label for="tanggal_lahir" :value="__('Tanggal Lahir')" />
+            <x-text-input id="tanggal_lahir" class="block mt-1 w-full" type="date" name="tanggal_lahir" :value="old('tanggal_lahir')"
+                required  />
+            <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
+
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="nomor_telepon" :value="__('Nomor Telepon')" />
+            <x-text-input id="nomor_telepon" class="block mt-1 w-full" type="text" name="nomor_telepon" :value="old('nomor_telepon')"
+                required  />
+            <x-input-error :messages="$errors->get('nomor_telepon')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="alamat" :value="__('Alamat')" />
+            <x-text-input id="alamat" class="block mt-1 w-full" type="text" name="alamat" :value="old('alamat')"
+                required  />
+            <x-input-error :messages="$errors->get('alamat')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />

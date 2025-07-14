@@ -134,4 +134,38 @@ class ChecklistScheduleController extends Controller
             'date' => $date,
         ]);
     }
+
+    public function checklistForm(ChecklistSchedule $checklistSchedule, TankTruck $tankTruck)
+    {
+        $documents = $tankTruck->checklistDocuments()
+            ->where('checklist_schedule_id', $checklistSchedule->id)
+            ->latest()
+            ->get();
+        return view('pages.admin.checklist-schedule.document', compact('tankTruck', 'checklistSchedule', 'documents'));
+    }
+
+    public function storeChecklist(Request $request, ChecklistSchedule $checklistSchedule, TankTruck $tankTruck)
+    {
+        $validated = $request->validate([
+            'status' => 'required|string|in:completed,rejected',
+            'file_path' => 'required|file|mimes:pdf|max:10240',
+            'catatan' => 'nullable|string|max:255',
+        ]);
+
+        // Store the file
+        $path = $request->file('file_path')->store('checklist-documents', 'public');
+
+        $document = $tankTruck->checklistDocuments()->create([
+            'checklist_schedule_id' => $checklistSchedule->id,
+            'vehicle_id' => $tankTruck->id,
+            'petugas_id' => Auth::id(),
+            'status' => $validated['status'],
+            'file_path' => $path,
+            'catatan' => $validated['catatan'] ?? null,
+            'status' => $validated['status'],
+        ]);
+
+        return redirect()->route('admin.checklist-schedule.document', [$checklistSchedule, $tankTruck])
+            ->with('success', 'Dokumen berhasil diupload dan menunggu verifikasi');
+    }
 }

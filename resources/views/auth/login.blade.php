@@ -41,12 +41,12 @@
                 </label>
             </div>
 
-            {{-- @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}"
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}"
                     class="text-sm text-amber-600 hover:text-amber-500 font-medium">
-                    {{ __('Forgot password?') }}
+                    {{ __('Register') }}
                 </a>
-            @endif --}}
+            @endif
         </div>
 
         <div>

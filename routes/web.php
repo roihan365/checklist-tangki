@@ -32,7 +32,11 @@ Route::prefix('admin')
 
         Route::resource('distributor', DistributorController::class);
         Route::get('checklist-schedule/by-date/{date}', [ChecklistScheduleController::class, 'showByDate'])->name('checklist-schedule.by-date');
-        Route::resource('checklist-schedule', ChecklistScheduleController::class);
+        Route::resource('checklist-schedule', ChecklistScheduleController::class)->except('show');
+        Route::get('checklist-schedule/document/{checklistSchedule}/{tankTruck}', [ChecklistScheduleController::class, 'checklistForm'])->name('checklist-schedule.document');
+        Route::post('checklist-schedule/document/{checklistSchedule}/{tankTruck}', [ChecklistScheduleController::class, 'storeChecklist'])->name('checklist-schedule.store-document');
+
+
         Route::resource('tank-trucks', TankTruckController::class);
 
         // Document Review
@@ -54,6 +58,8 @@ Route::prefix('distributor')
 
         Route::get('checklist-schedule', [DistributorChecklistScheduleController::class, 'index'])->name('checklist-schedule.index');
         Route::get('checklist-schedule/by-date/{date}', [DistributorChecklistScheduleController::class, 'showByDate'])->name('checklist-schedule.by-date');
+        Route::get('checklist-schedule/document/{checklistSchedule}/{tankTruck}', [DistributorChecklistScheduleController::class, 'checklistForm'])->name('checklist-schedule.document');
+
 
         Route::resource('tank-trucks', DistributorTankTruckController::class);
 
@@ -66,7 +72,7 @@ Route::prefix('distributor')
             ->name('document.history');
         Route::get('tank-truck/rejected', [DistributorDocumentsController::class, 'rejected'])
             ->name('document.rejected');
-        
+
 
         // Document Review
         Route::get('tank-trucks/{tank_truck}/documents/', [DistributorTankTruckController::class, 'documentForm'])

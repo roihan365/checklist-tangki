@@ -20,7 +20,7 @@
 
 <body class="bg-background" x-data="{ sidebarOpen: false, open: false, openDetail: 0 }">
     <!-- Layout -->
-    <x-dashboard.main title="ahay">
+    <x-dashboard.main title="Checklist Schedule">
         @include('layouts.includes.dashboard.sidebar')
 
         <x-slot name="content">

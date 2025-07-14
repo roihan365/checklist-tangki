@@ -68,4 +68,9 @@ class TankTruck extends Model
     {
         return $this->documents()->where('status', 'rejected');
     }
+
+    public function checklistDocuments()
+    {
+        return $this->hasMany(ChecklistDocument::class, 'vehicle_id');
+    }
 }
