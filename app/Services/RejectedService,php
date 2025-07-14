@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Services;
+
+use App\Repositories\rejctedRepository;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
+class RejectedRepository
+{
+    private $rejectedService;
+
+    public function __construct(rejectedSRepository $rejectedRepository)
+    {
+        $this->rejectedRepository = $rejectedRepository;
+    }
+
+    public function getAll(array $fields)
+    {
+        return $this->rejectedRepository->getAll($fields);
+    }
+
+    public function getById(int $id, array $fields)
+    {
+        return $this->rejectedRepository->getById($id, $fields ??['id'. 'name']);
+    }
+
+}
