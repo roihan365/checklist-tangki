@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ChecklistScheduleController;
 use App\Http\Controllers\Admin\DistributorController;
 use App\Http\Controllers\Admin\TankTruckController;
+use App\Http\Controllers\ChecklistReportController;
 use App\Http\Controllers\Distributor\ChecklistScheduleController as DistributorChecklistScheduleController;
 use App\Http\Controllers\Distributor\DocumentsController as DistributorDocumentsController;
 use App\Http\Controllers\Distributor\TankTruckController as DistributorTankTruckController;
@@ -35,7 +36,8 @@ Route::prefix('admin')
         Route::resource('checklist-schedule', ChecklistScheduleController::class)->except('show');
         Route::get('checklist-schedule/document/{checklistSchedule}/{tankTruck}', [ChecklistScheduleController::class, 'checklistForm'])->name('checklist-schedule.document');
         Route::post('checklist-schedule/document/{checklistSchedule}/{tankTruck}', [ChecklistScheduleController::class, 'storeChecklist'])->name('checklist-schedule.store-document');
-
+        Route::get('checklist-schedule/report', [ChecklistReportController::class, 'index'])->name('report.checklist-schedule');
+        Route::post('checklist-schedule/report', [ChecklistReportController::class, 'generate'])->name('report.checklist-schedule.generate');
 
         Route::resource('tank-trucks', TankTruckController::class);
 
