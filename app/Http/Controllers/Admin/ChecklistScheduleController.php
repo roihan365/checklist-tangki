@@ -168,4 +168,26 @@ class ChecklistScheduleController extends Controller
         return redirect()->route('admin.checklist-schedule.document', [$checklistSchedule, $tankTruck])
             ->with('success', 'Dokumen berhasil diupload dan menunggu verifikasi');
     }
+
+    public function report()
+    {
+        $schedules = ChecklistSchedule::with('vehicle')->get();
+
+        $schedulesByDate = $schedules->groupBy(function ($date) {
+            return Carbon::parse($date->tanggal)->format('Y-m-d');
+        });
+
+        $dateInfo = [];
+        foreach ($schedulesByDate as $date => $schedulesOnDate) {
+            $services = $schedulesOnDate->pluck('jenis_layanan')->unique()->values()->all();
+            $dateInfo[$date] = [
+                'services' => $services,
+                'has_schedule' => true,
+            ];
+        }
+        return view('pages.admin.checklist-schedule.report', [
+            'schedules' => $schedules,
+            'dateInfo' => json_encode($dateInfo),
+        ]);
+    }
 }
