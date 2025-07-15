@@ -1,13 +1,14 @@
 <x-guest-layout>
+    <x-alert />
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
-                autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="nama" :value="__('Nama')" />
+            <x-text-input id="nama" class="block mt-1 w-full" type="text" name="nama" :value="old('nama')" required
+                autofocus autocomplete="nama" />
+            <x-input-error :messages="$errors->get('nama')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
@@ -20,8 +21,10 @@
 
         <div class="mt-4">
             <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" />
-            <x-text-input id="jenis_kelamin" class="block mt-1 w-full" type="text" name="jenis_kelamin" :value="old('jenis_kelamin')"
-                required  />
+            <select class="w-full" name="jenis_kelamin" id="jenis_kelamin">
+                <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+            </select>
             <x-input-error :messages="$errors->get('jenis_kelamin')" class="mt-2" />
         </div>
 
@@ -35,10 +38,10 @@
         </div>
 
         <div class="mt-4">
-            <x-input-label for="nomor_telepon" :value="__('Nomor Telepon')" />
-            <x-text-input id="nomor_telepon" class="block mt-1 w-full" type="text" name="nomor_telepon" :value="old('nomor_telepon')"
+            <x-input-label for="no_telephone" :value="__('Nomor Telepon')" />
+            <x-text-input id="no_telephone" class="block mt-1 w-full" type="text" name="no_telephone" :value="old('no_telephone')"
                 required  />
-            <x-input-error :messages="$errors->get('nomor_telepon')" class="mt-2" />
+            <x-input-error :messages="$errors->get('no_telephone')" class="mt-2" />
         </div>
 
         <div class="mt-4">
