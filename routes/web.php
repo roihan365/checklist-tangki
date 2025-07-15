@@ -53,7 +53,14 @@ Route::prefix('distributor')
     ->middleware(['auth', 'role:admin-distributor'])
     ->group(function () {
         Route::get('/', function () {
-            return view('pages.distributor.index');
+            // return view('pages.distributor.index');
+            if (!auth()->check()) {
+                return redirect()->route('login');
+            } else {
+                if (auth()->user()->hasRole('admin-distributor')) {
+                    return redirect()->route('distributor.checklist-schedule.index');
+                }
+            }
         })->name('dashboard');
 
         Route::get('checklist-schedule', [DistributorChecklistScheduleController::class, 'index'])->name('checklist-schedule.index');
